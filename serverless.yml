@@ -1,0 +1,17 @@
+service: supercharge-aws-lambda
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+
+functions:
+  app:
+    handler: server.handler
+    memorySize: 384 # default is 1024 MB
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+plugins:
+  - serverless-offline
